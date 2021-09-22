@@ -35,5 +35,15 @@
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:text="this is my tweet" />
 
+    <TextView
+        android:id="@+id/tvTimeline"
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tvBody"
+        android:layout_alignBottom="@+id/tvBody"
+        android:layout_marginTop="-27dp"
+        android:layout_marginBottom="8dp"
+        android:text="TextView" />
+
 
 </RelativeLayout>
