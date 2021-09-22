@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:layout_margin="5dp">
 
     <ImageView
@@ -20,7 +20,7 @@
         android:id="@+id/tvScreenName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:layout_alignParentTop="true"
         tools:text="Eileen9179" />
@@ -29,9 +29,11 @@
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvScreenName"
-        android:layout_marginStart="1dp"
+        android:layout_below="@id/tvScreenName"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:text="this is my tweet" />
+
+
 </RelativeLayout>
