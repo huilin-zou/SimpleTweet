@@ -33,8 +33,8 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-![simpleTweetGif](https://user-images.githubusercontent.com/56774880/134441158-18ae076d-8980-469b-9d7a-312dd3237990.gif)
+<img src='https://user-images.githubusercontent.com/56774880/134441158-18ae076d-8980-469b-9d7a-312dd3237990.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 
 
