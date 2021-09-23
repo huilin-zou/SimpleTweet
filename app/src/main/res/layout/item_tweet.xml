@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp">
 
     <ImageView
@@ -37,13 +37,18 @@
 
     <TextView
         android:id="@+id/tvTimeline"
-        android:layout_width="70dp"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tvBody"
-        android:layout_alignBottom="@+id/tvBody"
-        android:layout_marginTop="-27dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="false"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@+id/tvScreenName"
+        android:layout_toRightOf="@id/tvScreenName"
+        tools:text="timejhvkvhlbjkbiiuobl" />
 
 
 </RelativeLayout>

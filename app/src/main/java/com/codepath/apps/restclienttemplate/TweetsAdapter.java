@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import java.text.BreakIterator;
 import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
@@ -61,18 +62,22 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
+        TextView tvTimeline;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProfileImage= itemView.findViewById(R.id.ivProfileImage);
             tvBody= itemView.findViewById(R.id.tvBody);
             tvScreenName= itemView.findViewById(R.id.tvScreenName);
+            tvTimeline = itemView.findViewById(R.id.tvTimeline);
 
         }
 
         public void bind(Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName );
+
+            tvTimeline.setText(tweet.getFormattedTimestamp());
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
         }
     }
