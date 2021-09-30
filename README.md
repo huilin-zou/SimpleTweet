@@ -30,11 +30,12 @@ The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
 
+
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://user-images.githubusercontent.com/56774880/135384420-2007fa68-683a-4793-b5b4-2d43ed42aeb4.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
+<img src='https://user-images.githubusercontent.com/56774880/135528857-b0d8bfeb-837c-4899-b3ee-0359500b9de9.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough' />
 
 
 
