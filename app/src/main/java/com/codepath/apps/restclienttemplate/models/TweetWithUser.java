@@ -10,7 +10,7 @@ public class TweetWithUser {
     @Embedded
     User user;
 
-    @Embedded(prefix = "tweet ")
+    @Embedded(prefix = "tweet_")
     Tweet tweet;
 
     public static List<Tweet> getTweetList(List<TweetWithUser> tweetWithUsers) {
@@ -22,6 +22,7 @@ public class TweetWithUser {
             tweets.add(tweet);
         }
         return tweets;
+
 
 
     }

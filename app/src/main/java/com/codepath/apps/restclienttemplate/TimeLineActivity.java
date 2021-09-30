@@ -32,18 +32,19 @@ import java.util.List;
 import okhttp3.Headers;
 import okhttp3.Request;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimeLineActivity extends AppCompatActivity {
 
     public static final String TAG="TimeLineActivity";
     private final int REQUEST_CODE=20;
 
-    TweetDao tweetDao;
+
     TwitterClient client;
+    TweetDao tweetDao;
     RecyclerView rvTweets;
     List<Tweet> tweets;
-    TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
-    EndlessRecyclerViewScrollListener scrollListener;
+    EndlessRecyclerViewScrollListener ScrollListener;
+    TweetsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,7 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.setLayoutManager(layoutManager);
         rvTweets.setAdapter(adapter);
 
-        scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
+        ScrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 Log.i(TAG,"onLoadMore: "+page);
@@ -85,7 +86,7 @@ public class TimelineActivity extends AppCompatActivity {
             }
         };
 
-        rvTweets.addOnScrollListener(scrollListener);
+        rvTweets.addOnScrollListener(ScrollListener);
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -103,6 +104,30 @@ public class TimelineActivity extends AppCompatActivity {
 
 
     }
+
+    private void loadMoreData() {
+        client.getNextPageOfTweets(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                Log.i(TAG, "onSuccess for LoadMoreData"+json.toString());
+                JSONArray jsonArray=json.jsonArray;
+                try {
+                    List<Tweet> tweets=Tweet.fromJsonArray(jsonArray);
+                    adapter.addAll(tweets);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.e(TAG, "onFailure for LoadMoreData", throwable);
+
+            }
+        },tweets.get(tweets.size()-1).id);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -134,28 +159,6 @@ public class TimelineActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void loadMoreData() {
-        client.getNextPageOfTweets(new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.i(TAG, "onSuccess for LoadMoreData"+json.toString());
-                JSONArray jsonArray=json.jsonArray;
-                try {
-                    List<Tweet> tweets=Tweet.fromJsonArray(jsonArray);
-                    adapter.addAll(tweets);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.i(TAG, "onFailure for LoadMoreData", throwable);
-
-            }
-        },tweets.get(tweets.size()-1).id);
-    }
 
     private void populateHomeTimeline() {
 
@@ -165,30 +168,31 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(TAG, "onSuccess"+json.toString());
                 JSONArray jsonArray=json.jsonArray;
                 try {
-                    List<Tweet> tweetsFromNetWork = Tweet.fromJsonArray(jsonArray);
+                    List<Tweet> tweetsFromNetwork = Tweet.fromJsonArray(jsonArray);
                     adapter.clear();
-                   adapter.addAll(tweetsFromNetWork);
+                   adapter.addAll(tweetsFromNetwork);
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             Log.i(TAG,"Saving data into database");
-                            List<User> usersFromNetWork=User.fromJsonTweetArray(tweetsFromNetWork);
-                            tweetDao.insertModel(usersFromNetWork.toArray(new User[0]));
-                            tweetDao.insertModel(tweetsFromNetWork.toArray(new Tweet[0]));
+                            List<User> usersFromNetwork=User.fromJsonTweetArray(tweetsFromNetwork);
+                            tweetDao.insertModel(usersFromNetwork.toArray(new User[0]));
+                            tweetDao.insertModel(tweetsFromNetwork.toArray(new Tweet[0]));
 
                         }
                     });
-                   swipeContainer.setRefreshing(false);
+                   //swipeContainer.setRefreshing(false);
 
                 } catch (JSONException e) {
                     Log.e(TAG,"Json Exception",e);
+                    e.printStackTrace();
                 }
 
             }
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.e(TAG, "onFailure"+response,throwable);
+                Log.e(TAG, "onFailure"+response, throwable);
 
             }
         });
