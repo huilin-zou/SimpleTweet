@@ -34,8 +34,8 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://user-images.githubusercontent.com/56774880/135384420-2007fa68-683a-4793-b5b4-2d43ed42aeb4.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-![simpleTweetWalkthrough2](https://user-images.githubusercontent.com/56774880/135384420-2007fa68-683a-4793-b5b4-2d43ed42aeb4.gif)
+<img src='https://user-images.githubusercontent.com/56774880/135384420-2007fa68-683a-4793-b5b4-2d43ed42aeb4.gif' title='Video Walkthrough' width='55' alt='Video Walkthrough' />
+
 
 
 ## Notes
