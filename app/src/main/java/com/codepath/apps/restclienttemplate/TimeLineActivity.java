@@ -55,7 +55,7 @@ public class TimeLineActivity extends AppCompatActivity {
         tweetDao = ((TwitterApp) getApplicationContext()).getMyDatabase().tweetDao();
 
 
-        swipeContainer=findViewById(R.id.swipeContainer);
+        swipeContainer=(SwipeRefreshLayout)findViewById(R.id.swipeContainer);
 
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -69,6 +69,8 @@ public class TimeLineActivity extends AppCompatActivity {
                 populateHomeTimeline();
             }
         });
+
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright);
         rvTweets=findViewById(R.id.rvTweets);
 
         tweets=new ArrayList<>();
@@ -162,6 +164,8 @@ public class TimeLineActivity extends AppCompatActivity {
 
     private void populateHomeTimeline() {
 
+        swipeContainer.setRefreshing(true);
+
         client .getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
@@ -169,8 +173,12 @@ public class TimeLineActivity extends AppCompatActivity {
                 JSONArray jsonArray=json.jsonArray;
                 try {
                     List<Tweet> tweetsFromNetwork = Tweet.fromJsonArray(jsonArray);
+                    TimeLineActivity.this.tweets.addAll(Tweet.fromJsonArray(jsonArray));
+                   //adapter.notifyItemChanged();
                     adapter.clear();
                    adapter.addAll(tweetsFromNetwork);
+
+                   swipeContainer.setRefreshing(false);
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
